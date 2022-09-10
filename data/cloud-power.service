@@ -1,0 +1,12 @@
+[Unit]
+Description=D-bus power autoswitch 
+
+[Service]
+Type=simple
+ExecStart=/home/raynor/Git/cloud-power/target/debug/cloud-power
+Restart=on-failure
+PID=/tmp/cloud-power.pid
+User=raynor
+
+[Install]
+WantedBy=multi-user.target

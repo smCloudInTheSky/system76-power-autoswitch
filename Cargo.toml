@@ -1,0 +1,12 @@
+[package]
+name = "cloud-power"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+system76-power = { git = "https://github.com/pop-os/system76-power" }
+zbus = "2.3.2" 
+upower_dbus = "0.2.0"
+futures = "0.3.24"
