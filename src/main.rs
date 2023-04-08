@@ -30,11 +30,10 @@ fn main() -> zbus::Result<()> {
         let connection = zbus::Connection::system().await?;
         let upower = UPowerProxy::new(&connection).await?;
 
-        apply_governor(upower.on_battery().await?) ;
-
         let mut stream = upower.receive_on_battery_changed().await;
 
-        while let Some(event) = stream.next().await {
+        while let Some(_event) = stream.next().await {
+            // TODO : fix c'est dégeux utiliser event à la place !!!
             apply_governor(upower.on_battery().await?) ;
         }
         Ok(())

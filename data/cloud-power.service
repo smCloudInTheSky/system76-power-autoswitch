@@ -3,10 +3,10 @@ Description=D-bus power autoswitch
 
 [Service]
 Type=simple
-ExecStart=/home/raynor/Git/cloud-power/target/debug/cloud-power
+ExecStart=/home/raynor/.cargo/bin/cloud-power
 Restart=on-failure
-PID=/tmp/cloud-power.pid
 User=raynor
+After=system76-power.service
 
 [Install]
 WantedBy=multi-user.target
