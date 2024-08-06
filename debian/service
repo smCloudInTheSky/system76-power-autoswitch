@@ -1,0 +1,8 @@
+[Unit]
+Description=D-bus system76-power autoswitch
+
+[Service]
+ExecStart=/usr/bin/system76-power-autoswitch
+
+[Install]
+WantedBy=multi-user.target

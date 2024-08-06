@@ -1,5 +1,7 @@
 [package]
-name = "cloud-power"
+name = "system76-power-autoswitch"
+description = "daemon that enable autoswitch between performance when on AC and bettery otherwise with system76-power utility"
+license = "GNU GPLV3"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,6 +9,23 @@ edition = "2021"
 
 [dependencies]
 system76-power = { git = "https://github.com/pop-os/system76-power" }
-zbus = "2.3.2" 
+zbus = "2.3.2"
 upower_dbus = "0.2.0"
 futures = "0.3.24"
+
+[package.metadata.deb]
+maintainer = "cloud <sylvain.maret@hotmail.fr>"
+copyright = "2024, cloud"
+license-file = ["LICENSE", "0"]
+extended-description = "daemon that trigger system76-power autoswitch"
+depends = "$auto"
+section = "utils"
+priority = "optional"
+assets = [
+    # binary
+    ["target/release/system76-power-autoswitch", "usr/bin/", "755"],
+]
+changelog = "changelog"
+default-features = false
+maintainer-scripts = "debian/"
+systemd-units = { enable = true }
