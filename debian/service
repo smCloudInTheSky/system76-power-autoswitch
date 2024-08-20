@@ -1,5 +1,6 @@
 [Unit]
 Description=D-bus system76-power autoswitch
+After=system76-power.service
 
 [Service]
 ExecStart=/usr/bin/system76-power-autoswitch
