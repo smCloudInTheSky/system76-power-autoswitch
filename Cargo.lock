@@ -191,16 +191,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "cloud-power"
-version = "0.1.0"
-dependencies = [
- "futures",
- "system76-power",
- "upower_dbus",
- "zbus",
-]
-
-[[package]]
 name = "concat-in-place"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1071,6 +1061,16 @@ dependencies = [
  "sysfs-class",
  "thiserror",
  "tokio",
+]
+
+[[package]]
+name = "system76-power-autoswitch"
+version = "0.1.0"
+dependencies = [
+ "futures",
+ "system76-power",
+ "upower_dbus",
+ "zbus",
 ]
 
 [[package]]
