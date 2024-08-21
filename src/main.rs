@@ -1,29 +1,38 @@
-extern crate upower_dbus ;
-extern crate zbus ;
-extern crate system76_power ; 
+extern crate system76_power;
+extern crate upower_dbus;
+extern crate zbus;
 
 use futures::stream::StreamExt;
+use system76_power::args::Args;
+
 use upower_dbus::UPowerProxy;
-use system76_power::client::PowerClient;
-use crate::system76_power::Power;
 
 fn apply_governor(on_battery: bool) {
-    let client = PowerClient::new();
+    let battery_on = Args::Profile {
+        profile: Some("battery".to_string()),
+    };
+    let battery_off = Args::Profile {
+        profile: Some("performance".to_string()),
+    };
+
     if on_battery {
         println!("applying battery profile");
-        match client.expect("failed to connect to power daemon").battery() {
-            Ok(num) => num,
-            Err(e) => println!("{:?}",e),
+        match system76_power::client::client(&battery_on)
+            .expect("failed to connect to power daemon")
+        {
+            Ok(_) => println!("profile updated"),
+            Err(e) => println!("{:?}", e),
         };
     } else {
         println!("applying performance profile");
-        match client.expect("failed to connect to daemon").performance() {
-            Ok(num) => num,
-            Err(e) => println!("{:?}",e),
+        match system76_power::client::client(&battery_off)
+            .expect("failed to connect to power daemon")
+        {
+            Ok(_) => println!("profile updated"),
+            Err(e) => println!("{:?}", e),
         };
     }
 }
-
 
 fn main() -> zbus::Result<()> {
     futures::executor::block_on(async move {
@@ -34,7 +43,7 @@ fn main() -> zbus::Result<()> {
 
         while let Some(_event) = stream.next().await {
             // TODO : fix c'est dégeux utiliser event à la place !!!
-            apply_governor(upower.on_battery().await?) ;
+            apply_governor(upower.on_battery().await?);
         }
         Ok(())
     })
