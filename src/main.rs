@@ -17,17 +17,13 @@ fn apply_governor(on_battery: bool) {
 
     if on_battery {
         println!("applying battery profile");
-        match system76_power::client::client(&battery_on)
-            .expect("failed to connect to power daemon")
-        {
+        match system76_power::client::client(&battery_on) {
             Ok(_) => println!("profile updated"),
             Err(e) => println!("{:?}", e),
         };
     } else {
         println!("applying performance profile");
-        match system76_power::client::client(&battery_off)
-            .expect("failed to connect to power daemon")
-        {
+        match system76_power::client::client(&battery_off) {
             Ok(_) => println!("profile updated"),
             Err(e) => println!("{:?}", e),
         };
